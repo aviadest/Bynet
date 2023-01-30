@@ -1,0 +1,39 @@
+<div>
+    <div class="mb-4">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a routerLink="." (click)="add()">Add</a>
+            </li>
+        </ul>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <tr class="bg-active bg-primary">
+                <th>Name</th>
+                <th>Id Number</th>
+                <th>Role</th>
+                <th>Manager Name</th>
+                <th>Actions</th>
+            </tr>
+
+            <tr *ngFor="let emp of data">
+                <td>
+                    {{ emp.firstName + ' ' + emp.lastName }}
+                </td>
+                <td>
+                    {{ emp.idNumber }}
+                </td>
+                <td>
+                    {{ emp.role }}
+                </td>
+                <td>
+                    {{ emp.managerName }}
+                </td>
+                <td>
+                    <a routerLink="." (click)="edit(emp.idNumber)">Edit</a> | 
+                    <a routerLink="." (click)="delete(emp.idNumber)">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

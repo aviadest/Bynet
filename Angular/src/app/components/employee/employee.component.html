@@ -1,0 +1,79 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ isNew ? 'Add New Employee' : 'Edit Employee' }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-control">
+            <label for="idNumber">Id Number:</label>
+            <input NumberOnly id="idNumber" type="text" [formControl]="idNumberInput" minLength="9" maxLength="9" />
+            <div *ngIf="idNumberInput && idNumberInput.errors && (idNumberInput.dirty || idNumberInput.touched)">
+                Error:
+                <label for="idNumber"
+                    *ngIf="idNumberInput.hasError('minlength') || idNumberInput.hasError('maxlength')">
+                    Length = 9
+                </label>
+                <label for="idNumber" *ngIf="idNumberInput.hasError('required')">
+                    field is <strong>required</strong>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label for="firstName">First Name:</label>
+            <input id="firstName" type="text" [formControl]="firstNameInput" maxLength="20" />
+            <div *ngIf="firstNameInput && firstNameInput.errors && (firstNameInput.dirty || firstNameInput.touched)">
+                Error:
+                <label for="firstName" *ngIf="roleInput.hasError('maxlength')">
+                    Max Length = 20
+                </label>
+                <label for="firstName" *ngIf="firstNameInput.hasError('required')">
+                    field is <strong>required</strong>
+                </label>
+            </div>
+        </div>
+        <div class="form-control">
+            <label for="lastName">Last Name:</label>
+            <input id="lastName" type="text" [formControl]="lastNameInput" maxLength="20" />
+            <div *ngIf="lastNameInput && lastNameInput.errors && (lastNameInput.dirty || lastNameInput.touched)">
+                Error:
+                <label for="lastName" *ngIf="roleInput.hasError('maxlength')">
+                    Max Length = 20
+                </label>
+                <label for="lastName" *ngIf="lastNameInput.hasError('required')">
+                    field is <strong>required</strong>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label for="role">Role:</label>
+            <input id="role" type="text" [formControl]="roleInput" maxLength="20" />
+            <div *ngIf="roleInput && roleInput.errors && (roleInput.dirty || roleInput.touched)">
+                Error:
+                <label for="role" *ngIf="roleInput.hasError('maxlength')">
+                    Max Length = 20
+                </label>
+                <label for="role" *ngIf="roleInput.hasError('required')">
+                    field is <strong>required</strong>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label for="manager">Manager:</label>
+            <select id="manager" #t (change)="change(t.value)">
+                <option></option>
+                <option *ngFor="let mng of managersList" [value]="mng.id" [selected]="mng.id === managerInput.value">{{
+                    mng.name }}</option>
+            </select>
+        </div>
+
+        <button>Save</button>
+
+        <label *ngIf="isSubmitFailed">Failed! try again</label>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
